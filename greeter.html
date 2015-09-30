@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Greeting</title>
+
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+</head>
+
+<body>
+    <label for="my-name">What is your name?</label>
+    <input id="js-my-name" name="my-name" type="text" placeholder="Mark">
+    <div id="js-greeting"></div>
+
+    <script>
+        var myName,
+            nameInput = document.getElementById('js-my-name'),
+            greetingDisplay = document.getElementById('js-greeting');
+
+        nameInput.addEventListener('change', function () {
+            myName = this.value;
+
+            if (myName) {
+                greetingDisplay.textContent = createGreeting(myName);
+            } else {
+                greetingDisplay.textContent = '';
+            }
+        });
+
+        function createGreeting (name) {
+            return 'Hello, ' + myName + ', nice to meet you!';
+        }
+    </script>
+</body>
+</html>

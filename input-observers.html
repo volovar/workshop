@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            font-size: 16px;
+        }
+
+        input {
+            display: block;
+            font-size: 16px;
+            margin-bottom: 12px;
+        }
+
+        label {
+            font-size: 16px;
+        }
+
+        .highlight {
+            color: #f04da9;
+        }
+
+        button {
+            background: #f1f1f1;
+            border: 1px solid;
+            color: #333;
+            cursor: pointer;
+            font-size: 16px;
+            padding: 4px 8px;
+        }
+
+        button:disabled {
+            color: #690a40;
+            cursor: default;
+            background: #f04da9;
+        }
+    </style>
+</head>
+<body>
+    <label for="inputA">Label A <span class="highlight">*required</span></label>
+    <input id="inputA" type="text" />
+
+    <label for="inputB">Label B</label>
+    <input id="inputB" type="text" />
+
+    <button id="submit">Submit!</button>
+
+    <script>
+        // The Observer List
+        function ObserverList () {
+            this.observerList = [];
+        }
+
+        ObserverList.prototype.add = function (obj) {
+            return this.observerList.push( obj );
+        };
+
+        ObserverList.prototype.count = function () {
+            return this.observerList.length;
+        };
+
+        ObserverList.prototype.get = function (index) {
+            if (index > -1 && index < this.observerList.length) {
+                return this.observerList[ index ];
+            }
+        };
+
+        ObserverList.prototype.indexOf = function (obj, startIndex) {
+            var i = startIndex;
+
+            while (i < this.observerList.length) {
+                if (this.observerList[i] === obj) {
+                    return i;
+                }
+
+                i++;
+            }
+
+            return -1;
+        };
+
+        ObserverList.prototype.removeAt = function (index) {
+            this.observerList.splice( index, 1 );
+        };
+
+        // The Subject
+        function Subject () {
+            this.observers = new ObserverList();
+        }
+
+        Subject.prototype.addObserver = function (observer) {
+            this.observers.add( observer );
+        };
+
+        Subject.prototype.removeObserver = function (observer) {
+            this.observers.removeAt( this.observers.indexOf( observer, 0 ));
+        };
+
+        Subject.prototype.notify = function (context) {
+            var observerCount = this.observers.count();
+
+            for (var i = 0; i < observerCount; i++) {
+                this.observers.get(i).update( context );
+            }
+        };
+
+        // The Observer
+        function Observer () {
+            this.update = function () {
+                // nothing here
+            };
+        }
+
+        // Extend an object with an extension
+        function extend (obj, extension) {
+            for (var key in extension) {
+                obj[key] = extension[key];
+            }
+        }
+
+        // References to DOM elements
+        var inputA = document.getElementById('inputA'),
+            inputB = document.getElementById('inputB'),
+            submit = document.getElementById('submit'),
+            httpReq = new XMLHttpRequest(),
+            reqStatus;
+
+        // handle request
+        httpReq.onreadystatechange = function () {
+            if (httpReq.readyState === 4) {
+                if (httpReq.status === 200) {
+                    reqStatus = 'completed';
+                }
+            }
+        };
+
+        // Concrete Subject
+        extend( inputA, new Subject() );
+
+        // send request, notify
+        inputA.onblur = function () {
+            if (this.value) {
+                httpReq.open('GET', 'http://api.wunderground.com/api/65467d0be1edb660/conditions/q/CA/San_Francisco.json', true);
+                httpReq.send(null);
+                reqStatus = 'requested';
+
+                inputA.notify(reqStatus);
+            }
+        }
+
+        extend( submit, new Observer() );
+
+        submit.update = function (value) {
+            console.log(value);
+        }
+
+        submit.onclick = function () {
+            if (reqStatus === 'completed') {
+                console.log('ready to go');
+            } else if (reqStatus === 'requested') {
+                console.log('requested, but waiting');
+            } else {
+                console.log('no request sent');
+            }
+        }
+
+        inputA.addObserver( submit );
+    </script>
+</body>
+</html>

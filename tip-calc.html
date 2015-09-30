@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tip Calculator</title>
+</head>
+
+<body>
+    <label for="bill-amount">Enter the bill amount:</label>
+    <input id="js-bill-amount" name="bill-amount" type="text" placeholder="11.50">
+
+    <label for="tip-rate">Enter the tip rate:</label>
+    <input id="js-tip-rate" name="tip-rate" type="text" placeholder="15">
+
+    <div id="js-tip"></div>
+    <div id="js-total"></div>
+
+    <script>
+        var billAmount = 0,
+            tipRate = 0,
+            tip = 0,
+            total = 0,
+            billInput = document.getElementById('js-bill-amount'),
+            tipInput = document.getElementById('js-tip-rate'),
+            tipDisplay = document.getElementById('js-tip'),
+            totalDisplay = document.getElementById('js-total');
+
+        billInput.addEventListener('change', function () {
+            checkNumber(this.value);
+            billAmount = this.value
+        });
+
+        tipInput.addEventListener('change', function () {
+            tipRate = this.value / 100;
+        });
+
+        function calculateTip () {
+
+        }
+
+        function checkNumber (val) {
+            if (isNaN(val)) {
+                console.log('not a number!');
+            } else {
+                console.log('its a number!');
+            }
+        }
+
+        function updateDisplay () {
+
+        }
+    </script>
+</body>
+</html>

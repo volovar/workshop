@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Character Counter</title>
+
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+</head>
+
+<body>
+    <label for="string-input">What is the input string?</label>
+    <input id="js-string-input" name="string-input" type="text">
+    <div id="js-string-display"></div>
+
+    <script>
+        var input,
+            output,
+            stringInput = document.getElementById('js-string-input'),
+            stringDisplay = document.getElementById('js-string-display');
+
+        stringInput.addEventListener('keyup', function () {
+            input = this.value;
+
+            updateDisplay(input);
+        });
+
+        function updateDisplay (str) {
+            stringDisplay.textContent = str + ' has ' + str.length + ' characters.'
+        }
+    </script>
+</body>
+</html>
