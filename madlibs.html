@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Madlibs</title>
+
+        <link rel="stylesheet" type="text/css" href="/css/style.css">
+    </head>
+
+    <body>
+        <script>
+            var noun = prompt('Enter a noun: '),
+                verb = prompt('Enter a verb: '),
+                adjective = prompt('Enter an adjective: '),
+                adverb = prompt('Enter an adverb: '),
+                // our blank template
+                blankMadlib = 'Do you %verb your %adjective %noun %adverb? That\'s hilarious!',
+                // updating the template with the inputted strings
+                newMadlib = blankMadlib.replace(/%noun/gi, noun).replace(/%verb/gi, verb).replace(/%adjective/gi, adjective).replace(/%adverb/gi, adverb);
+
+            console.log(newMadlib);
+        </script>
+    </body>
+</html>

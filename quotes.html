@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Print Quote</title>
+
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+</head>
+
+<body>
+    <label for="quote">What is the quote?</label>
+    <input id="js-quote" name="quote" type="text" placeholder="At least I'm housebroken">
+
+    <label for="quote-owner">Who said it?</label>
+    <input id="js-quote-owner" name="quote-owner" type="text" placeholder="The Dude">
+
+    <div id="js-quote-display"></div>
+
+    <script>
+        ////// non-GUI version. Only outputs to console
+        // var quote = prompt('What is the quote?'),
+        //     owner = prompt('Who said it?');
+
+        // console.log(createQuote());
+
+        // function createQuote() {
+        //     return owner + ' says, \"' + quote + '\"';
+        // };
+        //////
+        var quote,
+            owner,
+            quoteInput = document.getElementById('js-quote'),
+            quoteOwner = document.getElementById('js-quote-owner'),
+            quoteDisplay = document.getElementById('js-quote-display');
+
+        quoteInput.addEventListener('change', function () {
+            quote = this.value;
+            quoteDisplay.textContent = createQuote();
+        });
+
+        quoteOwner.addEventListener('change', function () {
+            owner = this.value;
+            quoteDisplay.textContent = createQuote();
+        });
+
+        function createQuote () {
+            if (quote && owner) {
+                return owner + ' says, \"' + quote + '\"';
+            } else {
+                return 'Awaiting input'
+            }
+        }
+    </script>
+</body>
+</html>
