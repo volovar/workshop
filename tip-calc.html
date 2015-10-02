@@ -2,17 +2,21 @@
 <html>
 <head>
     <title>Tip Calculator</title>
+
+    <link rel="stylesheet" type="text/css" href="./css/style.css">
 </head>
 
 <body>
-    <label for="bill-amount">Enter the bill amount:</label>
-    <input id="js-bill-amount" name="bill-amount" type="text" placeholder="11.50">
+    <div class="container">
+        <label for="bill-amount">Enter the bill amount:</label>
+        <input id="js-bill-amount" name="bill-amount" type="text" placeholder="11.50">
 
-    <label for="tip-rate">Enter the tip rate:</label>
-    <input id="js-tip-rate" name="tip-rate" type="text" placeholder="15">
+        <label for="tip-rate">Enter the tip rate:</label>
+        <input id="js-tip-rate" name="tip-rate" type="text" placeholder="15">
 
-    <div id="js-tip"></div>
-    <div id="js-total"></div>
+        <div id="js-tip"></div>
+        <div id="js-total"></div>
+    </div>
 
     <script>
         var billAmount = 0,

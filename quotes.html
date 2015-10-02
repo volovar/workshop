@@ -3,17 +3,19 @@
 <head>
     <title>Print Quote</title>
 
-    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <link rel="stylesheet" type="text/css" href="./css/style.css">
 </head>
 
 <body>
-    <label for="quote">What is the quote?</label>
-    <input id="js-quote" name="quote" type="text" placeholder="At least I'm housebroken">
+    <div class="container">
+        <label for="quote">What is the quote?</label>
+        <input id="js-quote" name="quote" type="text" placeholder="At least I'm housebroken">
 
-    <label for="quote-owner">Who said it?</label>
-    <input id="js-quote-owner" name="quote-owner" type="text" placeholder="The Dude">
+        <label for="quote-owner">Who said it?</label>
+        <input id="js-quote-owner" name="quote-owner" type="text" placeholder="The Dude">
 
-    <div id="js-quote-display"></div>
+        <div id="js-quote-display"></div>
+    </div>
 
     <script>
         ////// non-GUI version. Only outputs to console
