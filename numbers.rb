@@ -1,13 +1,16 @@
 print "What is the first number? "
-num1 = gets.chomp.to_i
+num1 = gets.chomp
 
 print "what is the second number? "
-num2 = gets.chomp.to_i
+num2 = gets.chomp
 
-added = num1 + num2
-subtracted = num1 - num2
-multiplied = num1 * num2
-divided = num1 / num2
+num1_i = num1.to_i
+num2_i = num2.to_i
+
+added = num1_i + num2_i
+subtracted = num1_i - num2_i
+multiplied = num1_i * num2_i
+divided = num1_i / num2_i
 
 puts "#{num1} + #{num2} = #{added}"
 puts "#{num1} - #{num2} = #{subtracted}"
