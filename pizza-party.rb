@@ -23,6 +23,10 @@ slices_per_pizza = gets.chomp
 
 total_slices = number_of_pizzas.to_f * slices_per_pizza.to_f
 
-slices_per_person = total_slices / number_of_people.to_f
+slices_per_person = (total_slices / number_of_people.to_f).floor
 
-puts slices_per_person.round
+leftover_slices = (total_slices - (slices_per_person * number_of_people.to_i)).to_i
+
+puts "#{number_of_people} people with #{number_of_pizzas} pizzas."
+puts "Each person gets #{slices_per_person} pieces of pizza."
+puts "There are #{leftover_slices} leftover pieces."
