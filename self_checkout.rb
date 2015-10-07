@@ -23,8 +23,8 @@ def get_tax(amount)
     amount * TAX_RATE
 end
 
-def price(number=1)
-    price_array = []
+def item(number=1)
+    item_array = []
 
     number.times do |i|
         i = i + 1
@@ -35,13 +35,13 @@ def price(number=1)
         print('Enter the quantity of item %i: ' % i)
         quantity = gets.chomp.to_i
 
-        price_array << [quantity, price]
+        item_array << [quantity, price]
     end
 
     total = 0
 
-    price_array.each do |price|
-        total = total + (price[0] * price[1])
+    item_array.each do |item|
+        total = total + (item[0] * item[1])
     end
 
     total
@@ -49,7 +49,7 @@ end
 
 TAX_RATE = 0.055
 
-subtotal = price(3)
+subtotal = item(3)
 tax_amount = get_tax(subtotal)
 total = subtotal + tax_amount
 
