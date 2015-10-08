@@ -1,5 +1,6 @@
 number_array = [1,2,3,4]
-string_array = ["Keith", "Matt", "Mike", "Colin"]
+string_array = [["Keith", "Matt"], ["Mike", "Colin"]]
 
-print number_array
-puts string_array[2]
+puts number_array
+
+string_array.each {|x| x.each {|y| puts y[0]}}
