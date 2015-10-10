@@ -7,9 +7,18 @@
 # outputs
 ## You are / are not old enough to legally drive
 #
-require "./get_input.rb"
+puts "What is your age? "
 
-age = get_input("What is you age? ")
+while age = gets.chomp
+    if age.class == String && age.to_i == 0
+        puts "Please enter your age as a number: "
+    elsif age.to_i <= 0
+        puts "Please enter a positive age: "
+    else 
+        break
+    end
+end
+
 message = age.to_i > 15 ? "are" : "are not"
 
 puts "You #{message} old enough to legally drive."
