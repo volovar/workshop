@@ -20,7 +20,7 @@ var Van = function (name, loc) {
 };
 
 Van.prototype = Object.create(Car.prototype);
-
+Van.prototype.constructor = Van;
 Van.prototype.grab = function () {
     console.log(this.name + ' is gonna grab ya!');
 };
