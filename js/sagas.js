@@ -15,3 +15,15 @@ newSaga();
 sagas[0]();
 sagas[1]();
 sagas[0]();
+
+function aHero () {
+    return 'Name'
+}
+
+function aDeed () {
+    return 'finds'
+}
+
+function aFoil () {
+    return 'Snake'
+}
