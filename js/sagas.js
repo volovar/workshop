@@ -4,7 +4,7 @@ var newSaga = function () {
     var foil = aFoil();
     sagas.push(function () {
         var deed = aDeed();
-        log(hero+deed+foil);
+        console.log(hero+deed+foil);
     });
 };
 
