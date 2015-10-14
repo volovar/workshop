@@ -1,13 +1,11 @@
 var Car = function (name, loc) {
-    var obj = {
-        name: name,
-        loc: loc
-    };
-    extend(obj, Car.methods);
+    var obj = Object.create(Car.prototype);
+    obj.loc = loc;
+    obj.name = name;
     return obj;
 };
 
-Car.methods = {
+Car.prototype = {
     move: function () {
         this.loc++;
     },
