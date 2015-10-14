@@ -1,8 +1,6 @@
 var Car = function (name, loc) {
-    var obj = Object.create(Car.prototype);
-    obj.loc = loc;
-    obj.name = name;
-    return obj;
+    this.loc = loc;
+    this.name = name;
 };
 
 Car.prototype = {

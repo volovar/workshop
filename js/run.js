@@ -1,8 +1,8 @@
-var amy = Car('Amy', 1);
+var amy = new Car('Amy', 1);
 amy.on();
 amy.move();
 
-var ben = Car('Ben', 9);
+var ben = new Car('Ben', 9);
 ben.on();
 ben.move();
 
