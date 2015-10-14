@@ -1,9 +1,8 @@
-var amy = new Car('Amy', 1);
+var zed = new Car('Zed', 3);
+zed.on();
+zed.move();
+
+var amy = new Van('Amy', 9);
 amy.on();
 amy.move();
-
-var ben = new Car('Ben', 9);
-ben.on();
-ben.move();
-
-amy.off();
+amy.grab();

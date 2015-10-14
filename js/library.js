@@ -1,6 +1,6 @@
 var Car = function (name, loc) {
-    this.loc = loc;
     this.name = name;
+    this.loc = loc;
 };
 
 Car.prototype = {
@@ -8,19 +8,19 @@ Car.prototype = {
         this.loc++;
     },
     on: function () {
-        console.log(this.name + ' starting engine!');
+        console.log(this.name + ' starting up!')
     },
     off: function () {
-        console.log(this.name + ' engine stopped!');
+        console.log(this.name + ' turning off!')
     }
 };
 
-// simple extend function to loop over methods
-// and add them to object
-function extend (obj, methods) {
-    for (prop in methods) {
-        obj[prop] = methods[prop];
-    }
+var Van = function (name, loc) {
+    Car.call(this, name, loc);
+};
 
-    return obj;
-}
+Van.prototype = Object.create(Car.prototype);
+
+Van.prototype.grab = function () {
+    console.log(this.name + ' is gonna grab ya!');
+};
