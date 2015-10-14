@@ -1,10 +1,17 @@
+var sagas = [];
 var hero = aHero();
 var newSaga = function () {
     var foil = aFoil();
-    var saga = function () {
+    sagas.push(function () {
         var deed = aDeed();
         log(hero+deed+foil);
-    }
+    });
 };
 
-log(hero);
+newSaga();
+sagas[0]();
+sagas[0]();
+newSaga();
+sagas[0]();
+sagas[1]();
+sagas[0]();
