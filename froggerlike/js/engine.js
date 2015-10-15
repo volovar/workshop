@@ -80,7 +80,10 @@ var Engine = (function(global) {
      */
     function update(dt) {
         updateEntities(dt);
-        // checkCollisions();
+
+        if (checkCollisions() || !player.moveable) {
+            reset();
+        }
     }
 
     /* This is called by the update function  and loops through all of the
@@ -95,6 +98,20 @@ var Engine = (function(global) {
             enemy.update(dt);
         });
         player.update();
+    }
+
+    function checkCollisions(dt) {
+        var collision = false;
+
+        allEnemies.forEach( function (enemy) {
+            if (enemy.row == player.row) {
+                if (enemy.x + 83 > player.x && enemy.x < player.x + 83) {
+                    collision = true;
+                }
+            }
+        });
+
+        return collision;
     }
 
     /* This function initially draws the "game level", it will then call
@@ -136,7 +153,6 @@ var Engine = (function(global) {
             }
         }
 
-
         renderEntities();
     }
 
@@ -148,7 +164,7 @@ var Engine = (function(global) {
         /* Loop through all of the objects within the allEnemies array and call
          * the render function you have defined.
          */
-        allEnemies.forEach(function(enemy) {
+        allEnemies.forEach(function (enemy) {
             enemy.render();
         });
 
@@ -161,6 +177,11 @@ var Engine = (function(global) {
      */
     function reset() {
         // noop
+        allEnemies.forEach(function (enemy) {
+            enemy.reset();
+        });
+
+        player.reset();
     }
 
     /* Go ahead and load all of the images we know we're going to need to
