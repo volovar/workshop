@@ -7,9 +7,12 @@
     </head>
 
     <body>
-        <div class="container">
-            <canvas id="c" width="800" height="500"></canvas>
+        <div class="container" style="min-width: 800px; max-width: initial;">
+            <canvas id="c" style="display: block; margin: 0 auto;" width="800" height="500"></canvas>
+            <hr style="display: block;" >
             <button class="grayscaler">Grayscale</button>
+            <button class="inverter">Invert</button>
+            <button class="saver">Save</button>
         </div>
 
         <script src="./image-canvas.js"></script>
