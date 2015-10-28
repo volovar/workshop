@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Blank</title>
+
+        <link rel="stylesheet" type="text/css" href="./css/style.css">
+        <style>
+            p {
+                margin: 0;
+            }
+
+            .block-container {
+                display: -webkit-flex;
+                display: flex;
+                flex-wrap: wrap;
+                overflow: hidden;
+                width: 300px;  
+            }
+
+            .block {
+                background: #999;
+                transition: all 160ms ease;
+                white-space: nowrap;
+                width: 100%;
+            }
+
+            .block:last-child {
+                background: #666;  
+            }
+
+            .button {
+
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="container">
+            <div class="block-container">
+                <div class="js-block-a block">
+                    <p>Width Block A</p>
+                </div>
+
+                <div class="js-block-b block" style="width: 0%;">
+                    <p>Width Block B</p>
+                </div>    
+            </div>
+            
+            <div>
+                <button class="js-block-button">Toggle Width Animation</button>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="block-container">
+                <div class="js-translate-a block">
+                    <p>Translate Block A</p>
+                </div>
+
+                <div class="js-translate-b block" style="transform: translate(100%)">
+                    <p>Translate Block B</p>
+                </div>    
+            </div>
+            
+            <div>
+                <button class="js-translate-button">Toggle Translate Animation</button>
+            </div>
+        </div>
+
+        <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script>
+            var $blockA = $('.js-block-a'),
+                $blockB = $('.js-block-b'),
+                $blockButton = $('.js-block-button'),
+                $translateA = $('.js-translate-a'),
+                $translateB = $('.js-translate-b'),
+                $translateButton = $('.js-translate-button'),
+                toggleState = 'first',
+                translateState = 'first';
+
+            $blockButton.on('click', function (e) {
+                toggleState = toggleAnimation ($blockA, $blockB, toggleState, 'width', '100%');
+            });
+
+            $translateButton.on('click', function (e) {
+                translateState = toggleAnimation ($translateA, $translateB, translateState, 'translate', '100%');
+            });
+
+            function toggleAnimation (animateTo, animateFrom, state, type, value) {
+                animateTo.stop();
+                animateFrom.stop();
+
+                if (state === 'first') {
+                    animation (animateTo, animateFrom, type, value);
+                    state = 'second'
+                } else if (state === 'second') {
+                    animation (animateFrom, animateTo, type, value);
+                    state = 'first'
+                }
+
+                return state;
+            }
+
+            function animation (elementA, elementB, type, value) {
+                // return function () {
+                if (type === 'translate') {
+                    elementA.css({'transform': 'translate(-'+ value +')'});
+                    elementB.css({'transform': 'translate(0%)'});
+                } else if (type === 'width') {
+                    elementA.css({'width': '0%'});
+                    elementB.css({'width': value});
+                }
+                // }
+            }
+        </script>
+    </body>
+</html>
