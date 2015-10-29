@@ -9,16 +9,54 @@
                 margin: 0;
             }
 
+            .container {
+                display: -webkit-flex;
+                display: flex;
+                flex-wrap: wrap;
+            }
+
+            .button {
+                background: rgba(255,255,255,0.3);
+                border: 1px solid;
+                border-radius: 2px;
+                color: #333;
+                cursor: pointer;
+                display: block;
+                font-size: 16px;
+                margin: 12px auto;
+                padding: 4px 8px;
+                outline: none;
+                transition: all 120ms linear;
+            }
+
+            .button:hover {
+                background: #f1f1f1;
+            }
+
+            .button:active {
+                background: #ccc;
+            }
+
+            .content-block {
+                margin-bottom: 24px;
+                margin-right: 12px;
+            }
+
             .block-container {
                 display: -webkit-flex;
                 display: flex;
                 flex-wrap: wrap;
                 overflow: hidden;
-                width: 300px;  
+                width: 300px;
             }
 
             .block {
                 background: #999;
+                -moz-box-sizing: border-box;
+                -webkit-box-sizing: border-box;
+                box-sizing: border-box;
+                height: 300px;
+                padding: 12px 16px;
                 text-shadow: 0 1px 8px rgba(0,0,0,0.4);
                 transition: all 180ms ease;
                 white-space: nowrap;
@@ -60,54 +98,56 @@
 
     <body>
         <div class="container">
-            <div class="block-container">
-                <div class="js-block-a block">
-                    <p>Width Block A</p>
+            <div class="content-block">
+                <div class="block-container">
+                    <div class="js-block-a block" style="color: #fff; background: url('http://placekitten.com/452/450?image=1') no-repeat 50% 50%; background-size: 100%; padding: 0;">
+                        <p>Width Block A</p>
+                    </div>
+
+                    <div class="js-block-b block" style="color: #fff; background: url('http://placekitten.com/452/450?image=5') no-repeat 50% 50%; background-size: 100%; width: 0%; padding: 0;">
+                        <p>Width Block B</p>
+                    </div>    
                 </div>
-
-                <div class="js-block-b block" style="width: 0%;">
-                    <p>Width Block B</p>
-                </div>    
+                
+                <div>
+                    <button class="js-block-button button">Toggle Width Animation</button>
+                </div>
             </div>
-            
-            <div>
-                <button class="js-block-button">Toggle Width Animation</button>
-            </div>
-        </div>
 
-        <div class="container">
-            <div class="horizontal-container">
-                <div class="js-horizontal-block horizontal-container horizontal-block">
-                    <div class="js-horizontal-a block">
-                        <p>Translate Block A</p>
-                    </div>
+            <div class="content-block">
+                <div class="horizontal-container">
+                    <div class="js-horizontal-block horizontal-container horizontal-block">
+                        <div class="js-horizontal-a block" style="color: #fff; background: url('http://placekitten.com/452/450?image=5') no-repeat 50% 50%; background-size: 100%;">
+                            <p>Translate Block A</p>
+                        </div>
 
-                    <div class="js-horizontal-b block">
-                        <p>Translate Block B</p>
-                    </div>   
-                </div> 
+                        <div class="js-horizontal-b block" style="color: #fff; background: url('http://placekitten.com/452/450?image=6') no-repeat 50% 50%; background-size: 100%;">
+                            <p>Translate Block B</p>
+                        </div>   
+                    </div> 
+                </div>
+                
+                <div>
+                    <button class="js-horizontal-button button">Toggle Translate Animation</button>
+                </div>
             </div>
-            
-            <div>
-                <button class="js-horizontal-button">Toggle Translate Animation</button>
-            </div>
-        </div>
 
-        <div class="container">
-            <div class="vertical-container">
-                <div class="js-vertical-block vertical-container vertical-block">
-                    <div class="js-vertical-a block" style="color: #fff; background: url('http://placekitten.com/452/450?image=4') no-repeat 50% 50%; background-size: 100%;">
-                        <p>Translate Block A</p>
-                    </div>
+            <div class="content-block">
+                <div class="vertical-container">
+                    <div class="js-vertical-block vertical-container vertical-block">
+                        <div class="js-vertical-a block" style="color: #fff; background: url('http://placekitten.com/452/450?image=4') no-repeat 50% 50%; background-size: 100%;">
+                            <p>Translate Block A</p>
+                        </div>
 
-                    <div class="js-vertical-b block" style="background: url('http://placekitten.com/452/450?image=1') no-repeat 50% 50%; background-size: 100%;">
-                        <p>Translate Block B</p>
-                    </div>   
-                </div> 
-            </div>
-            
-            <div>
-                <button class="js-vertical-button">Toggle Translate Animation</button>
+                        <div class="js-vertical-b block" style="background: url('http://placekitten.com/452/450?image=1') no-repeat 50% 50%; background-size: 100%;">
+                            <p>Translate Block B</p>
+                        </div>   
+                    </div> 
+                </div>
+                
+                <div>
+                    <button class="js-vertical-button button">Toggle Translate Animation</button>
+                </div>
             </div>
         </div>
 
