@@ -19,6 +19,7 @@
 
             .block {
                 background: #999;
+                text-shadow: 0 1px 8px rgba(0,0,0,0.4);
                 transition: all 180ms ease;
                 white-space: nowrap;
                 width: 100%;
@@ -29,16 +30,30 @@
                 color: #f1f1f1;  
             }
 
-            .translate-container {
+            .horizontal-container {
                 overflow: hidden;
                 width: 300px;
             }
 
-            .translate-block {
+            .horizontal-block {
                 display: -webkit-flex;
                 display: flex;
                 transition: all 180ms ease;
                 width: 200%;
+            }
+
+            .vertical-container {
+                overflow: hidden;
+                height: 300px;
+                width: 300px;
+            }
+
+            .vertical-block {
+                display: -webkit-flex;
+                display: flex;
+                flex-wrap: wrap;
+                height: 200%;
+                transition: all 180ms ease;
             }
         </style>
     </head>
@@ -61,20 +76,38 @@
         </div>
 
         <div class="container">
-            <div class="translate-container">
-                <div class="js-translate-block translate-container translate-block">
-                    <div class="js-translate-a block">
+            <div class="horizontal-container">
+                <div class="js-horizontal-block horizontal-container horizontal-block">
+                    <div class="js-horizontal-a block">
                         <p>Translate Block A</p>
                     </div>
 
-                    <div class="js-translate-b block">
+                    <div class="js-horizontal-b block">
                         <p>Translate Block B</p>
                     </div>   
                 </div> 
             </div>
             
             <div>
-                <button class="js-translate-button">Toggle Translate Animation</button>
+                <button class="js-horizontal-button">Toggle Translate Animation</button>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="vertical-container">
+                <div class="js-vertical-block vertical-container vertical-block">
+                    <div class="js-vertical-a block" style="color: #fff; background: url('http://placekitten.com/452/450?image=4') no-repeat 50% 50%; background-size: 100%;">
+                        <p>Translate Block A</p>
+                    </div>
+
+                    <div class="js-vertical-b block" style="background: url('http://placekitten.com/452/450?image=1') no-repeat 50% 50%; background-size: 100%;">
+                        <p>Translate Block B</p>
+                    </div>   
+                </div> 
+            </div>
+            
+            <div>
+                <button class="js-vertical-button">Toggle Translate Animation</button>
             </div>
         </div>
 
@@ -83,22 +116,29 @@
             var $blockA = $('.js-block-a'),
                 $blockB = $('.js-block-b'),
                 $blockButton = $('.js-block-button'),
-                $translateA = $('.js-translate-a'),
-                $translateB = $('.js-translate-b'),
-                $translateBlock = $('.js-translate-block'),
-                $translateButton = $('.js-translate-button'),
+                $horizontalBlock = $('.js-horizontal-block'),
+                $horizontalButton = $('.js-horizontal-button'),
+                $verticalBlock = $('.js-vertical-block'),
+                $verticalButton = $('.js-vertical-button'),
+                $verticalA = $('.js-vertical-a'),
+                $verticalB = $('.js-vertical-b'),
                 toggleState = 'first',
-                translateState = 'first';
+                horizontalState = 'first',
+                verticalState = 'first';
 
             $blockButton.on('click', function (e) {
                 toggleState = toggleAnimation ($blockA, $blockB, toggleState, 'width', '100%');
             });
 
-            $translateButton.on('click', function (e) {
-                translateState = toggleAnimation ($translateBlock, '', translateState, 'translate', '50%');
+            $horizontalButton.on('click', function (e) {
+                horizontalState = toggleAnimation ($horizontalBlock, '', horizontalState, 'translate', '50%', 'X');
             });
 
-            function toggleAnimation (elementA, elementB, state, type, value) {
+            $verticalButton.on('click', function (e) {
+                verticalState = toggleAnimation ($verticalBlock, '', verticalState, 'vertical-shift', '50%', 'Y', true);
+            });
+
+            function toggleAnimation (elementA, elementB, state, type, value, axis, fade) {
                 var newState;
 
                 elementA.stop();
@@ -108,20 +148,24 @@
                 }
 
                 if (type === 'translate') {
-                    newState = translateElements (elementA, state, value);
+                    newState = shiftElements (elementA, state, value, axis);
                 } else if (type === 'width') {
-                    newState = changeWidth (elementA, elementB, state, value);
+                    newState = changeWidth (elementA, elementB, state, value, axis);
+                } else if (type === 'vertical-shift') {
+                    newState = shiftElements (elementA, state, value, axis, fade);
                 }
 
                 return newState;
             }
 
-            function translateElements (element, state, value) {
+            function shiftElements (element, state, value, axis, fade) {
                 if (state === 'first') {
-                    element.css({'transform': 'translate(-'+ value +')'});
+                    element.css({'transform': 'translate' + axis + '(-'+ value +')'});
+
                     state = 'second'
                 } else if (state === 'second') {
-                    element.css({'transform': 'translate(0%)'});
+                    element.css({'transform': 'translate' + axis + '(0%)'});
+
                     state = 'first'
                 }
 
