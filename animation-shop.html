@@ -19,17 +19,26 @@
 
             .block {
                 background: #999;
-                transition: all 160ms ease;
+                transition: all 180ms ease;
                 white-space: nowrap;
                 width: 100%;
             }
 
             .block:last-child {
-                background: #666;  
+                background: #666;
+                color: #f1f1f1;  
             }
 
-            .button {
+            .translate-container {
+                overflow: hidden;
+                width: 300px;
+            }
 
+            .translate-block {
+                display: -webkit-flex;
+                display: flex;
+                transition: all 180ms ease;
+                width: 200%;
             }
         </style>
     </head>
@@ -52,14 +61,16 @@
         </div>
 
         <div class="container">
-            <div class="block-container">
-                <div class="js-translate-a block">
-                    <p>Translate Block A</p>
-                </div>
+            <div class="translate-container">
+                <div class="js-translate-block translate-container translate-block">
+                    <div class="js-translate-a block">
+                        <p>Translate Block A</p>
+                    </div>
 
-                <div class="js-translate-b block" style="transform: translate(100%)">
-                    <p>Translate Block B</p>
-                </div>    
+                    <div class="js-translate-b block">
+                        <p>Translate Block B</p>
+                    </div>   
+                </div> 
             </div>
             
             <div>
@@ -74,6 +85,7 @@
                 $blockButton = $('.js-block-button'),
                 $translateA = $('.js-translate-a'),
                 $translateB = $('.js-translate-b'),
+                $translateBlock = $('.js-translate-block'),
                 $translateButton = $('.js-translate-button'),
                 toggleState = 'first',
                 translateState = 'first';
@@ -83,34 +95,51 @@
             });
 
             $translateButton.on('click', function (e) {
-                translateState = toggleAnimation ($translateA, $translateB, translateState, 'translate', '100%');
+                translateState = toggleAnimation ($translateBlock, '', translateState, 'translate', '50%');
             });
 
-            function toggleAnimation (animateTo, animateFrom, state, type, value) {
-                animateTo.stop();
-                animateFrom.stop();
+            function toggleAnimation (elementA, elementB, state, type, value) {
+                var newState;
 
+                elementA.stop();
+
+                if (elementB) {
+                    elementB.stop();
+                }
+
+                if (type === 'translate') {
+                    newState = translateElements (elementA, state, value);
+                } else if (type === 'width') {
+                    newState = changeWidth (elementA, elementB, state, value);
+                }
+
+                return newState;
+            }
+
+            function translateElements (element, state, value) {
                 if (state === 'first') {
-                    animation (animateTo, animateFrom, type, value);
+                    element.css({'transform': 'translate(-'+ value +')'});
                     state = 'second'
                 } else if (state === 'second') {
-                    animation (animateFrom, animateTo, type, value);
+                    element.css({'transform': 'translate(0%)'});
                     state = 'first'
                 }
 
                 return state;
             }
 
-            function animation (elementA, elementB, type, value) {
-                // return function () {
-                if (type === 'translate') {
-                    elementA.css({'transform': 'translate(-'+ value +')'});
-                    elementB.css({'transform': 'translate(0%)'});
-                } else if (type === 'width') {
+            function changeWidth (elementA, elementB, state, value) {
+                if (state === 'first') {
                     elementA.css({'width': '0%'});
                     elementB.css({'width': value});
+                    state = 'second'
+                } else if (state === 'second') {
+                    elementA.css({'width': value});
+                    elementB.css({'width': '0%'});
+                    state = 'first'
                 }
-                // }
+
+                return state;
             }
         </script>
     </body>
