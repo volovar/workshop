@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Blank</title>
+        <title>Animation!</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
         <link rel="stylesheet" type="text/css" href="./css/style.css">
@@ -98,11 +98,55 @@
                 height: 200%;
                 transition: all 180ms ease;
             }
+
+            .slider-parent {
+                overflow: hidden;
+                transition: all 160ms ease;
+            }
+
+            .slider {
+                transition: all 160ms ease;
+                width: 200%;
+            }
+
+            .slider:after {
+                clear: both;
+                content: "";
+                display: block;
+                width: 100%;
+            }
+
+            .slider-block {
+                float: left;
+                width: 50%;
+            }
         </style>
     </head>
 
     <body>
         <div class="container">
+            <div class="content-block">
+                <button class="js-slider-button button">Click to animate</button>
+             
+                <div class="js-slider-parent slider-parent">
+                    <div class="js-slider slider">
+                        <div class="js-slider-a slider-block" style="color: #fff; background: url('http://placekitten.com/452/450?image=5') no-repeat 50% 50%; background-size: 100%;">
+                            <p>Content A</p>
+                        </div>
+
+                        <div class="js-slider-b slider-block" style="color: #fff; background: url('http://placekitten.com/452/450?image=1') no-repeat 50% 50%; background-size: 100%; padding: 0;">
+                            <p>Content B</p>
+                            <ul>
+                                <li>Item 1</li>
+                                <li>Item 2</li>
+                                <li>Item 3</li>
+                                <li>This block should be taller</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="content-block">
                 <div class="block-container">
                     <div class="js-block-a block" style="color: #fff; background: url('http://placekitten.com/452/450?image=1') no-repeat 50% 50%; background-size: 100%; padding: 0;">
@@ -157,6 +201,52 @@
         </div>
 
         <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+
+        <script>
+            var $sliderParent = $('.js-slider-parent'),
+                $slider = $('.js-slider'),
+                $sliderA = $('.js-slider-a'),
+                $sliderB = $('.js-slider-b'),
+                $sliderButton = $('.js-slider-button')
+                sliderState = 'a';
+
+            $sliderParent.height($sliderA.outerHeight());
+
+            $sliderButton.on('click', function (e) {
+                sliderState = toggleSlide({
+                    tParent: $sliderParent,
+                    toTranslate: $slider,
+                    elementA: $sliderA,
+                    elementB: $sliderB,
+                    state: sliderState
+                });
+            });
+
+            function toggleSlide (params) {
+                var parent = params.tParent,
+                    translater = params.toTranslate,
+                    elemA = params.elementA,
+                    elemB = params.elementB,
+                    state = params.state;
+
+                if (state === 'a') {
+                    parent.height(elemB.outerHeight());
+                    translater.css({
+                        'transform': 'translateX(-50%)'
+                    });
+                    state = 'b';
+                } else if (state === 'b') {
+                    parent.height(elemA.outerHeight());
+                    translater.css({
+                        'transform': 'translateX(0)'
+                    });
+                    state = 'a'
+                }
+
+                return state;
+            }
+        </script>
+
         <script>
             var $blockA = $('.js-block-a'),
                 $blockB = $('.js-block-b'),
