@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Animation!</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <link rel="stylesheet" type="text/css" href="./css/style.css">
+        <style>
+            .resize-container {
+
+            }
+
+            .resize-element {
+                background: #f1f1f1;
+                border: 1px solid #ccc;
+                border-radius: 3px;
+                box-sizing: border-box;
+                height: 400px;
+                padding: 8px 16px;
+                width: 640px;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="container">
+            <div class="js-resize-container resize-container">
+                <div id="js-resize-element" class="js-resize-element resize-element"></div>
+            </div>
+        </div>
+
+        <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+
+        <script>
+            var $resizeElem = $('.js-resize-element'),
+                $container = $('.js-resize-container');
+
+            var observer = new MutationObserver( function (mutations) {
+                mutations.forEach(function (mutation) {
+                    if ($resizeElem.outerHeight() !== $container.outerHeight()) {
+                        $container.outerHeight($resizeElem.outerHeight());
+                    }
+                });
+            });
+
+            var config = {
+                attributes: true,
+                childList: false,
+                characterData: true
+            };
+
+            $resizeElem.each( function () {
+                observer.observe(this, config);                
+            });
+        </script>
+    </body>
+</html>
